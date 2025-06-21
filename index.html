@@ -1,0 +1,288 @@
+<!-- ==============================
+1. Home page
+2. Switch between tracks and playlists
+3. Audiofiles container
+4. Playlist container
+5. "More details" page
+6. Filters by genre
+7. Sections by genre
+8. Search Page
+9. Add page
+10. Notifications Page
+11. Bottom navigation bar
+12. Modal window for creating a playlist
+13. Modal window for choosing a genre
+14. Modal window to confirm deleting a playlist
+15. Audio elemen
+============================== -->
+
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>YellowPlayer</title>
+		<link rel="icon" href="/src/assets/img/logo.png" />
+		<link rel="stylesheet" href="/styles/main.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+		/>
+	</head>
+	<body>
+		<div class="app-container">
+			<!-- Home page -->
+			<div class="page active" id="home">
+				<div class="logo-container">
+					<img
+						src="/src/assets/img/logo.png"
+						alt="Music App Logo"
+						class="logo"
+					/>
+				</div>
+				<div class="music-controls">
+					<div class="now-playing">
+						<div class="song-info">
+							<h3 class="song-title"></h3>
+							<p class="song-artist"></p>
+						</div>
+						<div class="progress-container">
+							<div class="progress-bar"></div>
+						</div>
+						<div class="time-info">
+							<span class="current-time"></span>
+							<span class="duration"></span>
+						</div>
+					</div>
+					<div class="controls">
+						<button class="control-btn" id="prev-btn">
+							<i class="fas fa-step-backward"></i>
+						</button>
+						<button class="control-btn play-btn" id="play-btn">
+							<i class="fas fa-play"></i>
+						</button>
+						<button class="control-btn" id="next-btn">
+							<i class="fas fa-step-forward"></i>
+						</button>
+					</div>
+					<div class="volume-control">
+						<button class="volume-btn" id="volume-btn" disabled>
+							<i class="fas fa-volume-up"></i>
+						</button>
+						<input
+							type="range"
+							id="volume-slider"
+							min="0"
+							max="1"
+							step="0.01"
+							value="1"
+						/>
+					</div>
+				</div>
+
+				<!-- Switch between tracks and playlists -->
+				<div class="view-switcher">
+					<button class="view-switch-btn active" data-view="tracks">
+						Аудиофайлы
+					</button>
+					<button class="view-switch-btn" data-view="playlists">
+						Плейлисты
+					</button>
+				</div>
+
+				<!-- Audiofiles container -->
+				<div class="playlist-container" id="tracks-view">
+					<h2 class="section-title">Ваши аудиофайлы</h2>
+					<div class="playlist" id="playlist"></div>
+				</div>
+
+				<!-- Playlist container -->
+				<div
+					class="playlists-container"
+					id="playlists-view"
+					style="display: none"
+				>
+					<h2 class="section-title">Мои плейлисты</h2>
+					<button class="action-btn" id="create-playlist-btn">
+						<i class="fas fa-plus"></i> Создать плейлист
+					</button>
+					<div class="playlists-list" id="playlists-list"></div>
+				</div>
+			</div>
+
+			<!-- "More details" page -->
+			<div class="page" id="more">
+				<div class="more-container">
+					<h2 class="section-title">Все аудиофайлы</h2>
+
+					<!-- Filters by genre -->
+					<div class="genre-filters">
+						<button class="genre-btn active" data-genre="all">Все</button>
+						<button class="genre-btn" data-genre="rap">Реп</button>
+						<button class="genre-btn" data-genre="rock">Рок</button>
+						<button class="genre-btn" data-genre="metal">Металл</button>
+						<button class="genre-btn" data-genre="other">Остальное</button>
+					</div>
+
+					<!-- Sections by genre -->
+					<div class="genre-section" id="rap-section">
+						<h3 class="genre-title">Реп</h3>
+						<div class="tracks-list" id="rap-tracks"></div>
+					</div>
+
+					<div class="genre-section" id="rock-section">
+						<h3 class="genre-title">Рок</h3>
+						<div class="tracks-list" id="rock-tracks"></div>
+					</div>
+
+					<div class="genre-section" id="metal-section">
+						<h3 class="genre-title">Металл</h3>
+						<div class="tracks-list" id="metal-tracks"></div>
+					</div>
+
+					<div class="genre-section" id="other-section">
+						<h3 class="genre-title">Остальное</h3>
+						<div class="tracks-list" id="other-tracks"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Search Page -->
+			<div class="page" id="search">
+				<div class="search-container">
+					<div class="search-bar">
+						<input
+							type="text"
+							placeholder="Поиск аудиофайлов..."
+							id="search-input"
+						/>
+						<button id="search-btn"><i class="fas fa-search"></i></button>
+					</div>
+					<div class="search-results" id="search-results"></div>
+				</div>
+			</div>
+
+			<!-- Add page -->
+			<div class="page" id="add">
+				<div class="add-container">
+					<h2>Добавить музыку</h2>
+					<div class="upload-area" id="upload-area">
+						<i class="fas fa-cloud-upload-alt upload-icon"></i>
+						<p>Перетащите файлы сюда или</p>
+						<input type="file" id="file-input" accept="audio/*" multiple />
+						<label for="file-input" class="upload-btn"
+							>Выбрать аудиофайлы</label
+						>
+					</div>
+					<div class="upload-status" id="upload-status"></div>
+				</div>
+			</div>
+
+			<!-- Notifications Page -->
+			<div class="page" id="notifications">
+				<div class="notifications-container">
+					<div class="notifications-header">
+						<h2>Уведомления</h2>
+						<button
+							class="clear-notifications-btn"
+							id="clear-notifications-btn"
+						>
+							<i class="fas fa-trash"></i> Очистить всё
+						</button>
+					</div>
+					<div class="notification-list" id="notification-list">
+						<div class="notification empty">
+							<p>Новых уведомлений нет</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Bottom navigation bar -->
+			<div class="bottom-nav">
+				<button class="nav-btn active" data-page="home">
+					<i class="fas fa-home"></i>
+					<span>Главная</span>
+				</button>
+				<button class="nav-btn" data-page="search">
+					<i class="fas fa-search"></i>
+					<span>Поиск</span>
+				</button>
+				<button class="nav-btn" data-page="add">
+					<i class="fas fa-plus"></i>
+					<span>Добавить</span>
+				</button>
+				<button class="nav-btn" data-page="more">
+					<i class="fas fa-list"></i>
+					<span>Подробнее</span>
+				</button>
+				<button class="nav-btn" data-page="notifications">
+					<i class="fas fa-bell"></i>
+					<span>Уведомления</span>
+				</button>
+			</div>
+
+			<!-- Modal window for creating a playlist -->
+			<div class="modal" id="playlist-modal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Новый плейлист</h3>
+					</div>
+					<div class="modal-body">
+						<div class="setting-item">
+							<label class="setting-label">Название плейлиста</label>
+							<input type="text" class="input" id="playlist-name" />
+						</div>
+						<div class="playlist-songs-selection">
+							<h4>Выберите аудиофайлы:</h4>
+							<div class="playlist-songs-list" id="playlist-songs-list"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="modal-btn" id="save-playlist">Создать</button>
+						<button class="modal-btn close-modal">Отмена</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal window for choosing a genre -->
+			<div id="genre-modal" class="genre-modal">
+				<div class="genre-modal__content">
+					<h3 class="genre-modal__title">
+						Выберите жанр для загружаемых аудиофайлов
+					</h3>
+					<select id="genre-select" class="genre-modal__select">
+						<option value="rap">Рэп</option>
+						<option value="rock">Рок</option>
+						<option value="metal">Метал</option>
+						<option value="other">Остальное</option>
+					</select>
+					<div class="genre-modal__buttons">
+						<button id="confirm-genre" class="modal-btn">Добавить</button>
+						<button id="cancel-genre" class="modal-btn">Отмена</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal window to confirm deleting a playlist -->
+			<div class="modal" id="confirm-delete-modal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Удалить плейлист</h3>
+					</div>
+					<div class="modal-body">
+						<p>Вы уверены, что хотите удалить этот плейлист?</p>
+					</div>
+					<div class="modal-footer">
+						<button class="modal-btn" id="confirm-delete-btn">Удалить</button>
+						<button class="modal-btn close-modal">Отмена</button>
+					</div>
+				</div>
+			</div>
+			<!-- Audio element -->
+			<audio id="audio-player"></audio>
+		</div>
+		<script src="/src/audio-player.js" type="module"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+	</body>
+</html>
