@@ -1,5 +1,12 @@
 <p align="center"><img src=".github/img/header.png"></p>
 
+[![JavaScript](https://img.shields.io/badge/-JavaScript-F5E0B7?style=for-the-badge&logo=javascript&logoColor=black&logoWidth=30)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![CSS](https://img.shields.io/badge/-CSS-A2D5E5?style=for-the-badge&logo=css3&logoColor=white&logoWidth=30)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![HTML](https://img.shields.io/badge/-HTML-F9C7C7?style=for-the-badge&logo=html5&logoColor=black&logoWidth=30)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![Capacitor](https://img.shields.io/badge/Capacitor-B3DEFF?style=for-the-badge&logo=capacitor&logoColor=black)](https://capacitorjs.com/)
+[![Vite](https://img.shields.io/badge/Vite-CBC7FF?style=for-the-badge&logo=vite&logoColor=black)](https://vite.dev/)
+---
+
 ## 🎵 Description
 **YellowPlayer** – This is a modern audio player for Android with an intuitive interface, but first of all it is an example, if you have some programming skills, you can change this application for yourself, improve it and make it better.
 Or you can use the release, compiled version from us, but there may be bugs and some unpleasant moments.
